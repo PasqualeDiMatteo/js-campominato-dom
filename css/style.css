@@ -1,0 +1,48 @@
+.grid{
+    width: 800px;
+    height: 800px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+}
+main{
+    background-color: aquamarine;
+}
+
+/* Cella */
+
+.cell{
+    background-color: aquamarine;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid black;
+    color: white;
+    cursor: pointer;
+}
+
+/* Cella Cliccata */
+
+.cell.clicked{
+    background-color: blue;
+}
+
+/* Cella difficoltà easy */
+
+.cell.easy{
+height: calc(100% / 10);
+flex-basis: calc(100% / 10);
+}
+
+/* Cella difficoltà medium */
+
+.cell.medium{
+    height: calc(100% / 9);
+    flex-basis: calc(100% / 9);
+}
+
+/* Cella difficoltà hard */
+.cell.hard{
+    height: calc(100% / 7);
+    flex-basis: calc(100% / 7);
+}
