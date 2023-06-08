@@ -9,6 +9,8 @@ const scoreElement = document.getElementById("score");
 
 // Funzioni
 
+// Funzione CreateCell
+
 const createCell = () => {
   const cell = document.createElement("div");
 
@@ -36,22 +38,44 @@ const createCell = () => {
   }
 };
 
+const generateBombs = (max, bombNumber) => {
+  const randomNumber = (max) => Math.floor(Math.random() * max) + 1;
+
+  const bombs = [];
+
+  while (bombs.length < bombNumber) {
+    const bomb = randomNumber(max);
+    if (!bombs.includes(bomb)) bombs.push(bomb);
+  }
+  return bombs;
+};
+
+// Dichiaro il numero di bombe
+
+let bombs = 16;
+
 // Al click del bottone Play
 
 buttonElement.addEventListener("click", () => {
   // Row e Cols
 
-  const rows = difficultyElement.value;
-  const cols = difficultyElement.value;
+  const rows = parseInt(difficultyElement.value);
+  const cols = parseInt(difficultyElement.value);
   const totalCells = cols * rows;
 
-  // Score
-
+  // Dichiarazioni
   let score = 0;
+  let bombs = 16;
+
   // clean
 
   scoreElement.innerHTML = " ";
   gridElement.innerHTML = "";
+
+  // Generats Bombs
+
+  generateBombs(totalCells, bombs);
+  console.log(generateBombs(totalCells, bombs));
 
   // Cell
 
