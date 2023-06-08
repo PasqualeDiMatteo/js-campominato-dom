@@ -6,6 +6,7 @@ const difficultyElement = document.getElementById("difficulty");
 const buttonElement = document.querySelector("button");
 const gridElement = document.getElementById("grid");
 const scoreElement = document.getElementById("score");
+const messageElement = document.getElementById("message");
 
 // Funzioni
 
@@ -87,6 +88,7 @@ buttonElement.addEventListener("click", () => {
 
   scoreElement.innerHTML = " ";
   gridElement.innerHTML = "";
+  messageElement.innerText = "";
 
   // Generats Bombs
 
@@ -112,14 +114,14 @@ buttonElement.addEventListener("click", () => {
         for (let i = 0; i < totalCells; i++) {
           if (bomb[i] == cell.innerText) {
             cell.classList.add("bomb");
-            console.log(`La partita è terminata!`);
+            messageElement.innerText = `La partita è terminata!`;
             isEndGame = true;
             endGame(bomb);
           }
         }
         scoreElement.innerText = ++score;
         if (score === totalCells - bombs) {
-          alert(`Hai vinto! Hai raggiunto il punteggio massimo`);
+          messageElement.innerText = `Hai vinto! Hai raggiunto il punteggio massimo`;
         }
       }
     });
