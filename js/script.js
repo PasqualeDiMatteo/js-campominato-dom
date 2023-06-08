@@ -5,6 +5,7 @@ console.log("JSOK");
 const difficultyElement = document.getElementById("difficulty");
 const buttonElement = document.querySelector("button");
 const gridElement = document.getElementById("grid");
+const scoreElement = document.getElementById("score");
 
 // Funzioni
 
@@ -38,11 +39,21 @@ const createCell = () => {
 // Al click del bottone Play
 
 buttonElement.addEventListener("click", () => {
+  // Row e Cols
+
   const rows = difficultyElement.value;
   const cols = difficultyElement.value;
   const totalCells = cols * rows;
 
+  // Score
+
+  let score = 0;
+  // clean
+
+  scoreElement.innerHTML = " ";
   gridElement.innerHTML = "";
+
+  // Cell
 
   for (let i = 1; i <= totalCells; i++) {
     const cell = createCell();
@@ -51,8 +62,12 @@ buttonElement.addEventListener("click", () => {
     // Al click della cella
 
     cell.addEventListener("click", () => {
-      cell.classList.add("clicked");
-      console.log(i);
+      if (!cell.classList.contains("clicked")) {
+        cell.classList.add("clicked");
+        console.log(i);
+        score++;
+        scoreElement.innerText = score;
+      }
     });
     gridElement.appendChild(cell);
   }
