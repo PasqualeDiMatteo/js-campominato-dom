@@ -62,7 +62,7 @@ buttonElement.addEventListener("click", () => {
   // Dichiarazioni
   let score = 0;
   let bombs = 16;
-
+  let isEndGame = false;
   // clean
 
   scoreElement.innerHTML = " ";
@@ -82,19 +82,22 @@ buttonElement.addEventListener("click", () => {
     // Al click della cella
 
     cell.addEventListener("click", () => {
+      if (isEndGame) return;
       if (!cell.classList.contains("clicked")) {
         cell.classList.add("clicked");
         console.log(i);
-
         // Creo un ciclo che controlla l'arrey con le bombe
-
         for (let i = 0; i < totalCells; i++) {
           if (bomb[i] == cell.innerText) {
             cell.classList.add("bomb");
             console.log(`La partita è terminata!`);
+            isEndGame = true;
           }
         }
         scoreElement.innerText = ++score;
+        if (score === totalCells - bombs) {
+          alert(`Hai vinto! Hai raggiunto il punteggio massimo`);
+        }
       }
     });
     gridElement.appendChild(cell);
