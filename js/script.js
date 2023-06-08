@@ -50,10 +50,6 @@ const generateBombs = (max, bombNumber) => {
   return bombs;
 };
 
-// Dichiaro il numero di bombe
-
-let bombs = 16;
-
 // Al click del bottone Play
 
 buttonElement.addEventListener("click", () => {
@@ -74,8 +70,8 @@ buttonElement.addEventListener("click", () => {
 
   // Generats Bombs
 
-  generateBombs(totalCells, bombs);
-  console.log(generateBombs(totalCells, bombs));
+  const bomb = generateBombs(totalCells, bombs);
+  console.log(bomb);
 
   // Cell
 
@@ -89,8 +85,16 @@ buttonElement.addEventListener("click", () => {
       if (!cell.classList.contains("clicked")) {
         cell.classList.add("clicked");
         console.log(i);
-        score++;
-        scoreElement.innerText = score;
+
+        // Creo un ciclo che controlla l'arrey con le bombe
+
+        for (let i = 0; i < totalCells; i++) {
+          if (bomb[i] == cell.innerText) {
+            cell.classList.add("bomb");
+            console.log(`La partita è terminata!`);
+          }
+        }
+        scoreElement.innerText = ++score;
       }
     });
     gridElement.appendChild(cell);

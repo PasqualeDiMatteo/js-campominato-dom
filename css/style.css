@@ -27,6 +27,10 @@ main{
     background-color: blue;
 }
 
+.cell.clicked.bomb {
+    background-color: red;
+  }
+
 /* Cella difficoltà easy */
 
 .cell.easy{
