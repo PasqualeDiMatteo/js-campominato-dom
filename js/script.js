@@ -38,6 +38,8 @@ const createCell = () => {
   }
 };
 
+// Funzione GenerateBombs
+
 const generateBombs = (max, bombNumber) => {
   const randomNumber = (max) => Math.floor(Math.random() * max) + 1;
 
@@ -50,6 +52,22 @@ const generateBombs = (max, bombNumber) => {
   return bombs;
 };
 
+// Funzione EndGame
+
+const endGame = (bombList) => {
+  // Recupero tutte le celle create
+  const allCells = gridElement.querySelectorAll("div");
+  // Creo un ciclo for che mi mostri tutte le celle cliccate e quelle con le bombe
+  for (let i = 0; i < allCells.length; i++) {
+    const singleCell = allCells[i];
+    singleCell.classList.add("clicked");
+    const cellNumber = parseInt(singleCell.innerText);
+    if (bombList.includes(cellNumber)) {
+      singleCell.classList.add("bomb");
+    }
+  }
+};
+
 // Al click del bottone Play
 
 buttonElement.addEventListener("click", () => {
@@ -60,10 +78,12 @@ buttonElement.addEventListener("click", () => {
   const totalCells = cols * rows;
 
   // Dichiarazioni
+
   let score = 0;
   let bombs = 16;
   let isEndGame = false;
-  // clean
+
+  // Clean
 
   scoreElement.innerHTML = " ";
   gridElement.innerHTML = "";
@@ -86,12 +106,15 @@ buttonElement.addEventListener("click", () => {
       if (!cell.classList.contains("clicked")) {
         cell.classList.add("clicked");
         console.log(i);
+
         // Creo un ciclo che controlla l'arrey con le bombe
+
         for (let i = 0; i < totalCells; i++) {
           if (bomb[i] == cell.innerText) {
             cell.classList.add("bomb");
             console.log(`La partita è terminata!`);
             isEndGame = true;
+            endGame(bomb);
           }
         }
         scoreElement.innerText = ++score;
